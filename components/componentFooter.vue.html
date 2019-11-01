@@ -1,0 +1,17 @@
+
+<script type="text/x-template">
+  <v-footer
+      :inset="data.nonStrict.footer.inset"
+      app
+    >
+      <span class="px-4">&copy; {{ new Date().getFullYear() }}</span>
+    </v-footer>
+</script>
+<script>
+   componentsDownloaded['componentFooter'] = {
+       // template: '#templateComponentAppBar'
+      render: Vue.compile(document.currentScript.ownerDocument.querySelector(`script[type=text\\/x-template]`).innerHTML).render,
+      //components: { componentExample }, // 'component-x': componentX   // <component-x></component-x>
+    
+  };
+</script>

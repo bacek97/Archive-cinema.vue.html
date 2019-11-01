@@ -1,0 +1,77 @@
+<style type="text/less">
+</style>
+
+<script type="text/x-template">
+  <v-data-table
+    v-model="selected"
+    :headers="headers"
+    :items="desserts"
+    :single-select="singleSelect"
+    item-key="name"
+    show-select
+    group-by="id"
+    class="elevation-1"
+    dense
+  >
+  
+    <template #top>
+      <v-switch v-model="singleSelect" label="Single select" class="pa-3 mt-0"></v-switch>
+    </template>
+  </v-data-table>
+</script>
+<script>
+   componentsDownloaded['componentLKTable'] = {
+      render: Vue.compile(document.currentScript.ownerDocument.querySelector(`script[type=text\\/x-template]`).innerHTML).render,
+    components: { vDraggable:vuedraggable, GridLayout: VueGridLayout.GridLayout, GridItem: VueGridLayout.GridItem }, // 'component-x': componentX   // <component-x></component-x>
+    data: () => ({
+      singleSelect: false,
+        selected: [],
+        headers: [
+          {
+            text: 'Dessert (100g serving)',
+            align: 'left',
+            sortable: false,
+            value: 'name',
+          },
+          { text: 'Серия', value: 'ser' },
+          { text: 'Fat (g)', value: 'fat' },
+          { text: 'Carbs (g)', value: 'carbs' },
+          { text: 'Protein (g)', value: 'protein' },
+          { text: 'Iron (%)', value: 'iron' },
+        ],
+        desserts: [
+          {
+            name: 'Друзья',
+            id: 100,
+            carbs: 24,
+            protein: 4.0,
+            iron: '1%',
+          },
+          {
+            name: 'Друзья s02',
+            id: 100,
+            carbs: 37,
+            protein: 4.3,
+            iron: '1%',
+          },
+          {
+            name: 'Друзья s02e03',
+            id: 100,
+            ser: "s02e03",
+            carbs: 37,
+            protein: 4.3,
+            iron: '1%',
+          },
+          {
+            name: 'SAW',
+            id: 262,
+            fat: 16.0,
+            carbs: 23,
+            protein: 6.0,
+            iron: '7%',
+          },
+        ],
+    })
+  }
+  // console.log(performance.now() - t0)
+</script>

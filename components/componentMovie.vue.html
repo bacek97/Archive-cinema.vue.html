@@ -1,0 +1,328 @@
+<style type="text/less">
+  td:first-child { width: 12rem; font-weight: bold; }
+</style>
+
+<script type="text/x-template">
+  <div>
+  <v-card v-if="mov" class="ma-2"
+    style="max-width: 60rem"
+  >
+    <v-row no-gutters>
+    <v-col>
+        <v-card-text class="display-1 py-2">
+          {{ mov.title }}
+        </v-card-text>
+    </v-col>
+  </v-row>
+  <v-row no-gutters>
+    <v-col class="col-auto mx-auto">
+      <v-img  class="mx-auto my-md-2 mx-md-3"
+      height="450"
+      width="300"
+      :src="'https://image.tmdb.org/t/p/'+img.poster_sizes[2]+mov.poster_path"
+      :lazy-src="'https://image.tmdb.org/t/p/'+img.poster_sizes[0]+img.filters[0]+mov.poster_path"
+    ></v-img>
+    </v-col>
+    <v-col>
+      <div>
+          <v-simple-table>
+            <template #default>
+              <tbody>
+                <tr v-for="item in desserts" :key="item.name">
+                  <td>{{ item.name + ":" }}</td>
+                  <td>{{ item.calories }}</td>
+                </tr>
+                <tr>
+                  <td>{{ "Жанры" + ":" }}</td>
+                  <td>
+                    <template v-for="genre,index in mov.genres">
+                      <span>{{ genre.name.toUpperCase() }}</span>{{ ((index < (mov.genres.length-1)) ? ', ' : " ") }}
+                    </template>
+                  </td>
+                </tr>
+                <tr>
+                  <td>{{ "В ролях" + ":" }}</td>
+                  <td>
+                    <template v-for="people,index in mov.credits.cast">
+                      <router-link
+                        class="white--text"
+                        :to="'/ru/people/'+people.id"
+                        v-if="index < 5"
+                      >{{ people.name }}</router-link>{{ ((index < 4) ? ", " : " ") }}
+                    </template>
+                  </td>
+                </tr>
+              </tbody>
+            </template>
+          </v-simple-table>
+        <!-- <p class="subtitle-1 grey--text">
+          <template v-for="genre,index in mov.genres">
+            <span>{{ genre.name.toUpperCase() }}</span>{{ ((index < (mov.genres.length-1)) ? ', ' : " ") }}
+          </template>
+        </p>
+        <v-card-actions>
+            <v-progress-circular
+              rotate="-90"
+              :value="mov.vote_average*10"
+              color="green"
+              size="64"
+              width="8"
+              class="headline"
+            >{{ mov.vote_average*10 }}</v-progress-circular>
+          <v-btn outlined fab color="pink">
+              <v-icon v-text="mdiSvg.mdiHeart" />
+            </v-btn>
+            
+            <v-rating
+              :value="mov.vote_average/2"
+              half-increments
+              length="10"
+              large />
+        </v-card-actions>
+        <div class="d-flex flex-nowrap space-between">
+        </div>
+        <p class="headline">Описание</p>
+        <p>{{ mov.overview }}</p>
+        <p>
+          <span class="headline">В главных ролях:</span>
+          <template v-for="people,index in mov.credits.cast">
+            <router-link
+              class="white--text"
+              :to="'/ru/people/'+people.id"
+              v-if="index < 5"
+            >{{ people.name }}</router-link>{{ ((index < 4) ? ", " : " ") }}
+          </template>
+        </p> -->
+      </div>
+    </v-col>
+  </v-row>
+</v-card>
+<v-skeleton-loader v-else
+  type="image" />
+  <v-tabs
+  :light="$vuetify.theme.dark" :dark="!$vuetify.theme.dark"
+    :fixed-tabs="true"
+    :right="false"
+    height="32px"
+  >
+    <v-tab>
+      Актёры
+    </v-tab>
+    <v-tab>
+      Дубляж
+    </v-tab>
+    <v-tab>
+      LostFilm
+    </v-tab>
+    <v-tab>
+      Гоблин
+    </v-tab>
+    <v-tab-item
+        v-for="n in 3"
+        :key="n"
+      >
+            <v-card
+      class="d-flex flex-wrap justify-space-around"
+      color="grey lighten-2"
+      flat
+      tile
+    >
+              <v-card
+                class="ma-1 justify-center text-center"
+                max-width="138"
+        v-for="n in 10"
+                light
+              >
+                <v-img
+                  src="https://image.tmdb.org/t/p/w138_and_h175_face/zixTWuMZ1D8EopgOhLVZ6Js2ux3.jpg"
+                  height="175px"
+                  width="138px"
+                ></v-img>
+
+                  <!-- Арнольд Алоис Шварценеггер -->
+                  <div class="subtitle-2 font-weight-bold mt-1">
+                  Joaquin Phoenix</div>
+                  <div class="body-2 mb-1">
+                  Arthur Fleck / Joker</div>
+<!-- 
+                <v-card-actions>
+
+
+                  <v-spacer></v-spacer>
+
+                  <v-btn
+                    icon
+                    @click="show = !show"
+                  >
+                    <v-icon>{{ show ? mdiSvg.mdiChevronUp : mdiSvg.mdiChevronDown }}</v-icon>
+                  </v-btn>
+                </v-card-actions>
+ -->
+                <v-expand-transition>
+                  <div v-show="show">
+                    <v-divider></v-divider>
+
+                    <v-card-text>
+                      I'm a thing. But, like most politicians, he promised more than he could deliver. You won't have time for sleeping, soldier, not with all the bed making you'll be doing. Then we'll go with that data file! Hey, you add a one and two zeros to that or we walk! You're going to do his laundry? I've got to find a way to escape.
+                    </v-card-text>
+                  </div>
+                </v-expand-transition>
+              </v-card>
+            </v-card>
+      </v-tab-item>
+  </v-tabs>
+  <v-row>
+      <v-col>
+        <v-btn fab :text="data.boolean">T</v-btn>
+      </v-col>
+      <v-col>
+        <v-overflow-btn
+          class="my-2"
+          :items="[
+        { text: 'Оригинал' },
+        { text: 'Дубляж' },
+        { text: 'LostFilm' }
+      ]"
+          label="Озвучка"
+          editable
+          item-value="text"
+        ></v-overflow-btn>
+      </v-col>
+      <v-col>
+        <v-overflow-btn
+          class="my-2"
+          :items="[
+        { text: '100%' },
+        { text: '75%' },
+        { text: '50%' },
+        { text: '25%' },
+        { text: '0%' },
+      ]"
+          label="Editable Btn"
+          editable
+          item-value="text"
+        ></v-overflow-btn>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
+        <video id="video" controls muted>
+          <source src="path/to/video.mp4" type="video/mp4" />
+          <audio id="myaudio" controls>
+              <source src="path/to/audio.mp3" type="audio/mpeg"/>
+          </audio>
+      </video>
+      </v-col>
+    </v-row>
+
+  <!-- <v-spacer></v-spacer>
+  <v-btn icon>
+    <v-icon v-text="mdiSvg.mdiMagnify" />
+  </v-btn> -->
+<!-- </v-toolbar> -->
+</div>
+</script>
+<script>
+  const componentLktable = () => Promise.resolve(componentDownload('componentLKTable'))
+   componentsDownloaded['componentMovie'] = {
+      render: Vue.compile(document.currentScript.ownerDocument.querySelector(`script[type=text\\/x-template]`).innerHTML).render,
+    components: { vDraggable:vuedraggable, GridLayout: VueGridLayout.GridLayout, GridItem: VueGridLayout.GridItem, componentLktable }, // 'component-x': componentX   // <component-x></component-x>
+    data: () => ({
+      headers: [
+          {
+            value: 'name',
+          },
+          { value: 'calories' },
+        ],
+        desserts: [
+          {
+            name: 'Статус',
+            calories: 'В кино',
+            fat: 25.0,
+            carbs: 51,
+            protein: 4.9,
+            iron: '22%',
+          },
+          {
+            name: 'Новая серия',
+            calories: 'Через 5 дней',
+            fat: 25.0,
+            carbs: 51,
+            protein: 4.9,
+            iron: '22%',
+          },
+          {
+            name: 'Оригинал',
+            calories: "Holly",
+            fat: 6.0,
+            carbs: 24,
+            protein: 4.0,
+            iron: '1%',
+          },
+          {
+            name: 'Дата выхода',
+            calories: "2019",
+            fat: 9.0,
+            carbs: 37,
+            protein: 4.3,
+            iron: '1%',
+          },
+          {
+            name: 'Страна',
+            calories: "Великобритания",
+            fat: 16.0,
+            carbs: 23,
+            protein: 6.0,
+            iron: '7%',
+          },
+          {
+            name: 'Время',
+            calories: "60 мин / 01:00",
+            fat: 3.7,
+            carbs: 67,
+            protein: 4.3,
+            iron: '8%',
+          },
+        ],
+
+
+      show: false,
+      vueGrid: {
+        cols: { lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 },
+        colNum: 12,
+        rowHeight:100,
+        isDraggable:true,
+        isResizable:true,
+        isMirrored:false,
+        margin:[0, 0],
+        verticalCompact:false,
+        useCssTransforms:true,
+        isResponsive:true,
+        layout: [
+          {"x":0,"y":0,"w":2,"h":3,"i":1,"minH":2,},
+          {"x":2,"y":0,"w":2,"h":3,"i":2,"minH":2,},
+        ],
+      },
+    }),
+    computed: {
+      mov() {
+        return this.downloaded.tmdb.movies.details[this.$route.params.movie] 
+      },
+      img() {
+        return this.downloaded.tmdb.img_conf
+      }
+    },
+    mounted() {
+      this.vlezayet= ~~(this.$el.clientWidth/this.data.nonStrict.cards.width)
+    },
+    created() {
+      let urls, to
+      urls = [`https://api.themoviedb.org/3/movie/${this.$route.params.movie}?api_key=6054e95746b053ff7e7e4e0e46d8ab3c&language=ru&append_to_response=keywords,recommendations,credits`]
+      to =  ["movie"]
+      this.$store.dispatch('loadData',{urls, to, i:'movieDetails', mut: "movieDetailsPlus"})
+    },
+    methods: {
+    }
+  }
+  // console.log(performance.now() - t0)
+</script>

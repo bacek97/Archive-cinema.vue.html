@@ -1,0 +1,214 @@
+<style type="text/less">
+  @import "/css.less";
+  .v-app-bar {
+    .appbar-down-enter-active {
+      transition: all 3s ease-out;
+    }
+    .appbar-down-enter {
+      transform: translateY(-100%) !important;
+      opacity: 0;
+    }
+    .theme--light .v-tab:not(.v-tab--active) {
+      color: black !important
+    }
+    .ghost {
+      opacity: 0.5;
+      background: #c8ebfb;
+    }
+    .v-label {
+      text-overflow: clip;
+    }
+  }
+
+</style>
+<script type="text/x-template">
+ <transition name="appbar-down">
+  <v-app-bar
+      v-if="downloaded.loading.appbar === 0"
+      :clipped-left="data.nonStrict.primaryDrawer.clipped"
+      app
+      dense
+      :dark="!$vuetify.theme.dark" :light="$vuetify.theme.dark"
+    >
+      <!-- <v-toolbar-title>
+        <v-app-bar-nav-icon @click.stop="data.nonStrict.primaryDrawer.model = !data.nonStrict.primaryDrawer.model"></v-app-bar-nav-icon>
+        <span class="hidden-sm-and-down mr-2" v-text='$t("title")'></span>
+      </v-toolbar-title> -->
+      <v-text-field
+        flat
+        v-show="focused === 'search' || focused === ''"
+        @focus="focused = 'search'"
+        @blur="focused = ''"
+        id="search_name"
+        hide-details
+        :prepend-inner-icon="mdiSvg.mdiMagnify"
+        placeholder="Поиск/Фильтр"
+      ></v-text-field>
+      <!-- <v-divider vertical></v-divider> -->
+      <v-text-field
+        flat
+        v-show="focused === 'people' || focused === ''"
+        @focus="focused = 'people'"
+        @blur="focused = ''"
+        class="mx-3"
+        hide-details
+        :prepend-inner-icon="mdiSvg.mdiMagnify"
+        placeholder="Актёр"
+      ></v-text-field>
+      <!-- <v-divider vertical></v-divider> -->
+      <v-text-field
+        flat
+        v-show="focused === 'creator' || focused === ''"
+        @focus="focused = 'creator'"
+        @blur="focused = ''"
+        hide-details
+        :prepend-inner-icon="mdiSvg.mdiMagnify"
+        placeholder="Режиссер"
+      ></v-text-field>
+ <!--      <v-spacer></v-spacer>
+      <v-card flat>
+        <v-tabs
+        v-model="model"
+        >
+        <v-draggable
+          v-model="list"
+          class="v-slide-group__content"
+          @update="tabUpdate"
+        ghost-class="ghost"
+        >
+          <v-tab
+            v-for="(tab, index) in list"
+            :key="index"
+            :href="'#tab-' + index"
+          >
+            {{ tab.name }}
+          </v-tab>
+        </v-draggable>
+        </v-tabs>
+      </v-card> -->
+            <template v-if="true" v-slot:extension>
+                 <v-btn-toggle
+                v-model="toggle_exclusive"
+                color="primary"
+                multiple
+                dense
+                class="mr-3"
+              >
+                <v-btn>
+                  Фильмы
+                </v-btn>
+                <v-btn>
+                  Сериалы
+                </v-btn>
+              </v-btn-toggle>
+              <!--     <v-range-slider
+                    v-model="range"
+                    :max="max"
+                    :min="min"
+                    thumb-label="always"
+                    :thumb-size="26"
+                    class="mt-12 pt-1"
+                  ></v-range-slider> -->
+              <div style="width: 7.2rem" class="mt-4">
+                <v-overflow-btn
+                  dense
+                  v-model="year1"
+                  :items="[
+                { text: '1980' },
+                { text: '1990' },
+                { text: '2010' },
+                { text: '2020' },
+              ]"
+                  label="Год от"
+                  editable
+                  item-value="text"
+                ></v-overflow-btn>
+              </div>
+               <v-divider vertical></v-divider>
+              <div style="width: 7.2rem" class="mt-4">
+                <v-overflow-btn
+                  dense
+                  v-model="year2"
+                  :items="[
+                { text: '1980' },
+                { text: '1990' },
+                { text: '2010' },
+                { text: '2020' },
+              ]"
+                  label="до"
+                  editable
+                  item-value="text"
+                ></v-overflow-btn>
+              </div>
+                <v-spacer></v-spacer>
+                <v-btn><v-icon v-text="mdiSvg.mdiEyeOff" /></v-btn><br />
+                <v-btn><v-icon v-text="mdiSvg.mdiEyeOff" style="break-before: always;"/></v-btn>
+      </template>
+    </v-app-bar>
+  </transition>
+</script>
+<script>
+  componentsDownloaded['componentAppBar'] = {
+    // template: '#templateComponentAppBar'
+      render: Vue.compile(document.currentScript.ownerDocument.querySelector(`script[type=text\\/x-template]`).innerHTML).render,
+    components: { vDraggable:vuedraggable, }, // 'component-x': componentX   // <component-x></component-x>
+    data: () => ({
+      focused: "",
+      toggle_exclusive: [0,1],
+       year1: "2020",
+       year2: "2020",
+        min: 1980,
+        max: 2020,
+        range: [2018, 2019],
+      enabled: true,
+      list: [
+        { name: "Роли", id: 0 },
+        { name: "Просмотр", id: 1 },
+        { name: "Отзывы", id: 2 },
+        { name: "Похожие", id: 3 }
+      ],
+      dragging: false,
+      model: "tab-1"
+    }),
+    methods: {
+      focus_name(e) {
+        console.log(e)
+      },
+      focus_people(e) {
+        console.log(e)
+      },
+      focus_creator(e) {
+        console.log(focused)
+      },
+      tabUpdate(evt) {
+      let tabNumber = Number(this.model.slice(4)); // The active tab number before udpate
+      let oldIndex = evt.oldIndex; // Old index number of tab we are moving
+      let newIndex = evt.newIndex; // New index number of tab we are moving
+      /**
+       * This is description for each if condition with corresponding number
+       * 1. Check if tab moved is the active one
+       * 2. Check if tab moved is placed on active tab from right side
+       * 3. Check if tab moved is placed on active tab from left side
+       * 4. Check if tab moved to right side of active tab
+       * 5. Check if tab moved to left side of active tab
+       */
+      if (tabNumber === oldIndex) {  //схватил активный
+        tabNumber = newIndex;
+      } else if (oldIndex<tabNumber && tabNumber<=newIndex) { //справа стало больше
+        tabNumber--
+      } else if (oldIndex>tabNumber && tabNumber>=newIndex) {//слева стало больше
+        tabNumber++
+      }
+      console.log(tabNumber, oldIndex, newIndex)
+      this.model = "tab-" + tabNumber;
+    }
+    },
+    beforeCreate() {
+      this.$store.commit("startLoading", "appbar")
+    },
+    mounted() {
+      this.$store.commit("finishLoading", "appbar")
+    }
+    
+  };
+</script>

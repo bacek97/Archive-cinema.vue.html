@@ -1,0 +1,8 @@
+CACHE MANIFEST
+# v1 - 2011-0
+CACHE:
+/modules/app.js
+/modules/createAll.js
+/modules/langs/array.json
+/modules/langs/ru.json
+/components/componentUrl.vue.html

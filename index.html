@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<!-- https://codepen.io/bacek97/pen/zQxgjy -->
+<html>
+
+<script>
+  let t0 = performance.now()
+  let componentsDownloaded={}
+  const componentDownload = (componentName) =>
+  // Promise на всякий случай
+    new Promise((resolve, reject) => {
+      var link = document.createElement("link")
+      link.href = `/components/${componentName}.vue.html`
+      link.rel = "import"
+      link.onload = () => {
+        link.import.querySelectorAll("style[type=text\\/less]").forEach((style) => {
+            less.render(style.innerHTML).then(
+                ({ css }) => {
+                    document.getElementById('styLessCompiled').innerHTML += css
+                    // e.remove()
+                },
+                (err) => { console.error(err) }
+            )
+        })
+        resolve(componentsDownloaded[componentName])
+      }
+      document.body.appendChild(link)
+    })
+</script>
+
+<head>
+  <title>Loading...</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1, user-scalable=no, minimal-ui" />
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <link rel="icon" type="image/svg+xml" href='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve" height="100px" width="100px">
+      <circle cx="50" cy="50" r="40" stroke="white" stroke-width="3" fill="silver" />
+    </svg>' />
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-149368880-1"></script> -->
+<!-- <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-149368880-1');
+</script> -->
+
+<!-- 
+  <script src='https://unpkg.com/vuex@3.1.1/dist/vuex.js'></script>
+  <script src='https://unpkg.com/vue/dist/vue.js'></script>
+  <script src='https://unpkg.com/vue-i18n/dist/vue-i18n.min.js'></script>
+  <script src='https://unpkg.com/vue-router/dist/vue-router.js'></script>
+  <script src='https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.js'></script>
+  <script src='https://unpkg.com/sortablejs@1.10.0-rc3/Sortable.min.js'></script>
+  <script src='https://cdn.jsdelivr.net/npm/vuedraggable/dist/vuedraggable.umd.min.js'></script>
+  <script src='https://cdn.jsdelivr.net/npm/vue-grid-layout/dist/vue-grid-layout.umd.min.js'></script>
+  <script src='https://unpkg.com/pako@1.0.10/dist/pako.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/1.3.3/webcomponents-hi.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/less.js/3.9.0/less.min.js'></script> 
+-->
+  <script src='https://cdn.jsdelivr.net/npm/mediaelement@4.2.14/build/mediaelement-and-player.min.js'></script> 
+  <!-- <link rel="stylesheet/less" type="text/css" href="/css.less" /> -->
+  
+  <!-- <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css" rel="stylesheet"> -->
+  <!-- <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet"> -->
+
+  <style type="text/css" id='styLessCompiled'></style>
+</head>
+
+<body>
+    <div id='beforeMountVM'>Loading............................................................
+      <style>
+            body {
+              animation: colorchange 4s ease-in; /* animation-name followed by duration in seconds*/
+                /* you could also use milliseconds (ms) or something like 2.5s */
+                
+              background: #333;
+            }
+
+            @keyframes colorchange
+            {
+              from {background: white;}
+            }
+            
+            div {
+              width: 40em;
+              color:white;
+              font-size: 22pt;
+              white-space:nowrap;
+              overflow:hidden;
+              opacity: 0;
+              animation: type 9s steps(50, end);
+          }
+          @keyframes type{
+              from { width: 0; color: black; opacity: 1; }
+          }
+      </style>
+    </div>
+
+  <script src="/cacheCDN.js"></script>
+<script src="/modules/vm.js" type="module"></script>
+</body>
+
+</html>

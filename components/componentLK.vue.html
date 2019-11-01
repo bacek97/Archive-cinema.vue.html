@@ -1,0 +1,202 @@
+<style type="text/less">
+  /* th:nth-child(5) {
+    width: 21%;
+  } */
+</style>
+
+<script type="text/x-template">
+  <!-- <v-container
+        fluid
+        fill-height
+      > -->
+        <!-- <v-layout
+          align-center
+          justify-center
+        >
+          <v-draggable v-model="data.myArray" draggable=".item">
+            <div v-for="element in data.myArray" :key="element.id" class="item" v-text="element.name" />
+            <template #header>
+              <button>Add</button>
+              <br />
+              <button>del</button>
+            </template>
+          </v-draggable>
+        </v-layout> -->
+        <!-- <grid-layout
+        :layout.sync="data.nonStrict.vueGrid.layout"
+        :col-num="data.nonStrict.vueGrid.colNum"
+        :row-height="data.nonStrict.vueGrid.rowHeight"
+        :is-draggable="data.nonStrict.vueGrid.isDraggable"
+        :is-resizable="data.nonStrict.vueGrid.isResizable"
+        :is-mirrored="data.nonStrict.vueGrid.isMirrored"
+        :vertical-compact="data.nonStrict.vueGrid.verticalCompact"
+        :margin="data.nonStrict.vueGrid.margin"
+        :use-css-transforms="data.nonStrict.vueGrid.useCssTransforms"
+        :responsive="data.nonStrict.vueGrid.responsive"
+        >
+
+            <grid-item v-for="item in data.nonStrict.vueGrid.layout"
+                      :x="item.x"
+                      :y="item.y"
+                      :w="item.minW"
+                      :h="item.h"
+                      :i="item.i">
+                <v-card
+                  class="mx-auto"
+                  :flat="data.nonStrict.cards.flat"
+                  :loading="data.nonStrict.cards.loading"
+                  :outlined="data.nonStrict.cards.outlined"
+                  :elevation="data.nonStrict.cards.elevation"
+                  :raised="data.nonStrict.cards.raised"
+                  :width="data.nonStrict.cards.width"
+                  :height="data.nonStrict.cards.height"
+                >
+                  <v-card-title>I'm a title {{item.i}}</v-card-title>
+
+                  <v-card-text>I'm card text</v-card-text>
+                  <v-card-actions v-if="data.nonStrict.cards.actions">
+                    <v-btn icon>
+                      <v-icon>mdi-heart</v-icon>
+                    </v-btn>
+                    <v-btn text>Click</v-btn>
+                    <v-btn outlined>Click</v-btn>
+                  </v-card-actions>
+                </v-card>
+                
+                <div text icon style='position: absolute; top: -1.5rem; left: -1.5rem'>
+                  <v-icon>check_circle</v-icon>
+                </div>
+            </grid-item>
+        </grid-layout> -->
+        <grid-layout
+        :layout.sync="data.nonStrict.vueGrid.layout"
+        :col-num="data.nonStrict.vueGrid.colNum"
+        :cols="data.nonStrict.vueGrid.cols"
+        :row-height="data.nonStrict.vueGrid.rowHeight"
+        :is-draggable="data.nonStrict.vueGrid.isDraggable"
+        :is-resizable="data.nonStrict.vueGrid.isResizable"
+        :vertical-compact="data.nonStrict.vueGrid.verticalCompact"
+        :use-css-transforms="data.nonStrict.vueGrid.useCssTransforms"
+        :responsive="data.nonStrict.vueGrid.isResponsive"
+        :margin="data.nonStrict.vueGrid.margin"
+        :is-mirrored="data.nonStrict.vueGrid.isMirrored"
+        >
+        <grid-item 
+                  :x="data.nonStrict.vueGrid.layout[0].x"
+                  :y="data.nonStrict.vueGrid.layout[0].y"
+                  :w="data.nonStrict.vueGrid.layout[0].w"
+                  :minW="data.nonStrict.vueGrid.layout[0].minW"
+                  :h="data.nonStrict.vueGrid.layout[0].h"
+                  :i="data.nonStrict.vueGrid.layout[0].i"
+              >
+              <v-card
+              class="mx-auto"
+              :flat="data.nonStrict.cards.flat"
+              :loading="data.nonStrict.cards.loading"
+              :outlined="data.nonStrict.cards.outlined"
+              :elevation="data.nonStrict.cards.elevation"
+              :raised="data.nonStrict.cards.raised"
+              :width="data.nonStrict.cards.width"
+              :height="data.nonStrict.cards.height"
+            >
+              <!-- <v-card-title>I'm a title {{item.i}}</v-card-title> -->
+
+              <v-row justify="space-around">
+              <v-avatar>
+                <img
+                  src="https://cdn.vuetifyjs.com/images/john.jpg"
+                  alt="John"
+                >
+              </v-avatar>
+            </v-row>
+            <v-card-text>
+              <span>bacek97</span><br>
+              <span class="text--primary">
+                <span>Тагил реально рулит!</span>
+              </span>
+            </v-card-text>
+            <v-simple-table dense>
+              <template #default>
+                <!-- <thead>
+                  <tr>
+                    <th class="text-left">Name</th>
+                    <th class="text-left">Calories</th>
+                  </tr>
+                </thead> -->
+                <tbody>
+                  <tr>
+                    <td>Зарегистрирован</td>
+                    <td>21.12.12</td>
+                  </tr>
+                  <tr>
+                    <td>Потрачено</td>
+                    <td>100500 часов</td>
+                  </tr>
+                  <tr>
+                    <td>Интересующие жанры</td>
+                    <td>Фантастика, боевик, триллер</td>
+                  </tr>
+                  <tr>
+                    <td>Интересующие категории</td>
+                    <td>Путешествия во времени, антиутопия</td>
+                  </tr>
+                </tbody>
+              </template>
+            </v-simple-table>
+              <!-- <v-card-actions v-if="data.nonStrict.cards.actions">
+                <v-btn icon>
+                  <v-icon>mdi-heart</v-icon>
+                </v-btn>
+                <v-btn text>Click</v-btn>
+                <v-btn outlined>Click</v-btn>
+              </v-card-actions> -->
+            </v-card>
+            
+            <!-- <div text icon style='position: absolute; top: -1.5rem; left: -1.5rem'>
+              <v-icon>check_circle</v-icon>
+            </div> -->
+        </grid-item>
+
+        <grid-item 
+                  :x="data.nonStrict.vueGrid.layout[1].x"
+                  :y="data.nonStrict.vueGrid.layout[1].y"
+                  :w="data.nonStrict.vueGrid.layout[1].w"
+                  :minW="data.nonStrict.vueGrid.layout[1].minW"
+                  :h="data.nonStrict.vueGrid.layout[1].h"
+                  :i="data.nonStrict.vueGrid.layout[1].i"
+              >
+              <v-card
+              class="mx-auto"
+              :flat="data.nonStrict.cards.flat"
+              :loading="data.nonStrict.cards.loading"
+              :outlined="data.nonStrict.cards.outlined"
+              :elevation="data.nonStrict.cards.elevation"
+              :raised="data.nonStrict.cards.raised"
+              :width="data.nonStrict.cards.width"
+              :height="data.nonStrict.cards.height"
+            >
+            <component-lktable></component-lktable>
+            </v-card>
+        </grid-item>
+      </grid-layout>
+      <!-- </v-container> -->
+</script>
+<script>
+  const componentLktable = () => Promise.resolve(componentDownload('componentLKTable'))
+   componentsDownloaded['componentLK'] = {
+      render: Vue.compile(document.currentScript.ownerDocument.querySelector(`script[type=text\\/x-template]`).innerHTML).render,
+    components: { vDraggable:vuedraggable, GridLayout: VueGridLayout.GridLayout, GridItem: VueGridLayout.GridItem, componentLktable }, // 'component-x': componentX   // <component-x></component-x>
+    data: () => ({
+      vlezayet: 2
+    }),
+    mounted() {
+      this.vlezayet= ~~(this.$el.clientWidth/this.data.nonStrict.cards.width)
+    },
+    updated() {
+      this.vlezayet= ~~(this.$el.clientWidth/this.data.nonStrict.cards.width)
+    },
+    methods: {
+    }
+  }
+  // console.log(performance.now() - t0)
+</script>

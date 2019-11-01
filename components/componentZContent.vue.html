@@ -1,0 +1,147 @@
+
+<script type="text/x-template">
+  <v-btn
+    bottom
+    color="pink"
+    dark
+    fab
+    fixed
+    right
+    @click="data.nonStrict.dialog = !data.nonStrict.dialog"
+  >
+    <v-icon>{{mdiSvg.mdiSettings}}</v-icon>
+    <v-dialog
+      v-model="data.nonStrict.dialog"
+      max-width="800px"
+    >
+      <v-card>
+        <v-card-title class="" v-text='$t("settings")' />
+        <v-container grid-list-sm>
+          <v-layout
+            wrap
+          >
+            <v-flex
+              xs12
+              align-center
+              justify-space-between
+            >
+              <v-layout align-center>
+                <v-avatar
+                  size="40px"
+                  class="mr-4"
+                >
+                  <img
+                    src="//ssl.gstatic.com/s2/oz/images/sge/grey_silhouette.png"
+                    alt=""
+                  >
+                </v-avatar>
+                <v-text-field
+                  placeholder="Name"
+                ></v-text-field>
+              </v-layout>
+            </v-flex>
+            <v-flex xs6>
+              <v-text-field
+                prepend-icon="business"
+                placeholder="Company"
+              ></v-text-field>
+            </v-flex>
+            <v-flex xs6>
+              <v-text-field
+                placeholder="Job title"
+              ></v-text-field>
+            </v-flex>
+            <v-flex
+                    xs4
+                    md4
+                  >
+                    <span>Scheme</span>
+                    <v-switch
+                      v-model="$vuetify.theme.dark"
+                      primary
+                      label="Dark"
+                    ></v-switch>
+                    <span>Drawer</span>
+              <v-radio-group
+                v-model="data.nonStrict.primaryDrawer.type"
+                column
+              >
+                <v-radio
+                  v-for="drawer in data.nonStrict.primaryDrawer.types"
+                  :key="drawer"
+                  :label="drawer"
+                  :value="drawer.toLowerCase()"
+                  primary
+                ></v-radio>
+              </v-radio-group>
+              <v-switch
+                v-model="data.nonStrict.primaryDrawer.clipped"
+                label="Clipped"
+                primary
+              ></v-switch>
+              <v-switch
+                v-model="data.nonStrict.primaryDrawer.floating"
+                label="Floating"
+                primary
+              ></v-switch>
+              <v-switch
+                v-model="data.nonStrict.primaryDrawer.mini"
+                label="Mini"
+                primary
+              ></v-switch>
+              <span>Footer</span>
+              <v-switch
+                v-model="data.nonStrict.footer.inset"
+                label="Inset"
+                primary
+              ></v-switch>
+              </v-flex>
+              <v-flex
+              xs4
+              md4
+            >
+              
+            </v-flex>
+            <v-flex
+              xs4
+              md4
+             >
+              <v-switch v-model="data.nonStrict.cards.flat" label="Flat"></v-switch>
+              <v-switch v-model="data.nonStrict.cards.outlined" label="Outlined"></v-switch>
+              <v-switch v-model="data.nonStrict.cards.raised" label="Raised"></v-switch>
+              <v-switch v-model="data.nonStrict.cards.loading" label="Loading"></v-switch>
+              <v-switch v-model="data.nonStrict.cards.actions" label="With actions"></v-switch>
+              <v-slider v-model="data.nonStrict.cards.elevation" label="Elevation" min="0" max="24"></v-slider>
+              <v-slider v-model="data.nonStrict.cards.width" label="Width" min="0" max="1000"></v-slider>
+              <v-slider v-model="data.nonStrict.cards.height" label="Height" min="0" max="1000"></v-slider>
+              <v-switch v-model="data.nonStrict.vueGrid.responsive" label="responsive"></v-switch>
+            </v-flex>
+          </v-layout>
+        </v-container>
+        <v-card-actions>
+          <v-btn
+            text
+            color="primary"
+          >More</v-btn>
+          <v-spacer></v-spacer>
+          <v-btn
+            text
+            color="primary"
+            @click="data.nonStrict.dialog = false"
+          >Cancel</v-btn>
+          <v-btn
+            text
+            @click="data.nonStrict.dialog = false"
+          >Save</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+  </v-btn>
+</script>
+<script>
+   componentsDownloaded['componentZContent'] = {
+       // template: '#templateComponentAppBar'
+      render: Vue.compile(document.currentScript.ownerDocument.querySelector(`script[type=text\\/x-template]`).innerHTML).render,
+      //components: { componentExample }, // 'component-x': componentX   // <component-x></component-x>
+  };
+</script>
